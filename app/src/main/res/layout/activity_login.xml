@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_2"
+    android:backgroundTint="#50FFFFFF"
+    android:backgroundTintMode="src_over"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/applogo_color"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Enter E-Mail"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:fontFamily="serif"
+        android:inputType="textEmailAddress"
+        android:alpha="0.5"
+        android:textColorHint="#000"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Enter Password"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:fontFamily="serif"
+        android:inputType="textPassword"
+        android:alpha="0.5"
+        android:textColorHint="#000"/>
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_margin="5dp"
+        android:fontFamily="serif"
+        android:text="Login"/>
+
+    <TextView
+        android:id="@+id/loginQn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Don't have an Account? Sign Up"
+        android:fontFamily="serif"
+        android:gravity="center"/>
+
+</LinearLayout>
