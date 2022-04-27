@@ -1,16 +1,31 @@
 ### Hi there 👋
 
-<!--
-**FinEase/finease** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Weekly Report 1
 
-Here are some ideas to get you started:
+Team: finEase
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Topic: Money control
+
+First Presentation: Done by Kamram Akthar
+
+As one of our team member persented, the topic we choose is money control and making an application to manage finances easily named finease.
+
+Progress in the first week: Created a starting page and login module.
+
+How we did it? 
+
+Coding it in JAVA language in Androidstudio and using the Firebase platform to store the login details of the users. Attaching the images of the landing page and the Login module.
+
+Agenda for the next week: To create landing page with pageholders for all the planned activities.
+
+Images of what we did: 
+
+
+Thanks and Regards
+
+FinEase Team Members
+
+
+
+
+
