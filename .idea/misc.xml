@@ -4,11 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_add.xml" value="0.208" />
-        <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_budget.xml" value="0.1" />
+        <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_budget.xml" value="0.2056434373663959" />
+        <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_expense.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_login.xml" value="0.25052083333333336" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_main.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_registration.xml" value="0.25052083333333336" />
-        <entry key="..\:/Codes/finease/app/src/main/res/layout/input_layout.xml" value="0.2056434373663959" />
+        <entry key="..\:/Codes/finease/app/src/main/res/layout/input_layout.xml" value="0.1" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/retrieve_layout.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/update_layout.xml" value="0.2056434373663959" />
         <entry key="..\:/Users/neeth/Desktop/ISEE Project/finease/app/src/main/res/layout/activity_main.xml" value="0.1453804347826087" />

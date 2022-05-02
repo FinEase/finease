@@ -2,7 +2,7 @@
     <string name="app_name">FinEase</string>
 
     <string-array name="items">
-        <item>Select item</item>
+        <item>Select Item</item>
         <item>Transport</item>
         <item>Food</item>
         <item>House</item>
@@ -12,6 +12,14 @@
         <item>Apparel</item>
         <item>Health</item>
         <item>Personal</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="mode">
+        <item>Select Mode of Payment</item>
+        <item>Cash</item>
+        <item>Card</item>
+        <item>Account</item>
         <item>Other</item>
     </string-array>
 </resources>

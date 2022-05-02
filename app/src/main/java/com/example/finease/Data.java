@@ -2,15 +2,16 @@ package com.example.finease;
 
 public class Data {
 
-    String item,date,id,itemNday,itemNweek,itemNmonth;
+    String item, mode, date,id,itemNday,itemNweek,itemNmonth;
     int amount,week,month;
     String notes;
 
     public Data() {
     }
 
-    public Data(String item, String date, String id, String itemNday, String itemNweek, String itemNmonth, int amount, int week, int month, String notes) {
+    public Data(String item, String mode, String date, String id, String itemNday, String itemNweek, String itemNmonth, int amount, int week, int month, String notes) {
         this.item = item;
+        this.mode = mode;
         this.date = date;
         this.id = id;
         this.itemNday = itemNday;
@@ -28,6 +29,14 @@ public class Data {
 
     public void setItem(String item) {
         this.item = item;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 
     public String getDate() {

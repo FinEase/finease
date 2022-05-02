@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select a budget Item"
+            android:text="Select an Item"
             android:gravity="center"
             android:textColor="#000"
             android:id="@+id/item"
@@ -26,12 +26,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Spinner
-                android:id="@+id/itemsspinner"
+                android:id="@+id/pmodespinner"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:entries="@array/mode"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="#fff">
+            </Spinner>
+            <Spinner
+                android:id="@+id/itemspinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:entries="@array/items"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 android:background="#fff">
             </Spinner>
 
@@ -94,8 +106,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-
 
 </androidx.cardview.widget.CardView>

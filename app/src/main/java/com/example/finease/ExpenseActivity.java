@@ -44,32 +44,32 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 
-public class BudgetActivity extends AppCompatActivity {
+public class ExpenseActivity extends AppCompatActivity {
 
     private TextView totalBudgetAmountTextView;
     private RecyclerView recyclerView;
 
     private FloatingActionButton fab;
 
-    private DatabaseReference budgetRef, personalRef;
+    private DatabaseReference expenseRef, personalRef;
     private FirebaseAuth mAuth;
     private ProgressDialog loader;
 
     private String post_key = "";
     private String item = "";
+    private String mode = "";
     private int amount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_budget);
+        setContentView(R.layout.activity_expense);
 
         mAuth = FirebaseAuth.getInstance();
-        budgetRef = FirebaseDatabase.getInstance().getReference().child("budget").child(mAuth.getCurrentUser().getUid());
+        expenseRef = FirebaseDatabase.getInstance().getReference().child("expenses").child(mAuth.getCurrentUser().getUid());
         personalRef = FirebaseDatabase.getInstance().getReference("personal").child(mAuth.getCurrentUser().getUid());
         loader = new ProgressDialog(this);
 
-        totalBudgetAmountTextView = findViewById(R.id.totalBudgetAmountTextView);
         recyclerView = findViewById(R.id.recyclerView);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -78,7 +78,7 @@ public class BudgetActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        budgetRef.addValueEventListener(new ValueEventListener() {
+        expenseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int totalAmount = 0;
@@ -86,8 +86,8 @@ public class BudgetActivity extends AppCompatActivity {
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
                     totalAmount += data.getAmount();
-                    String sTotal = String.valueOf("Month budget: $" + totalAmount);
-                    totalBudgetAmountTextView.setText(sTotal);
+//                    String sTotal = String.valueOf("Month budget: $" + totalAmount);
+//                    totalBudgetAmountTextView.setText(sTotal);
                 }
             }
 
@@ -117,24 +117,35 @@ public class BudgetActivity extends AppCompatActivity {
         dialog.setCancelable(false);
 
         final Spinner itemSpinner = myView.findViewById(R.id.itemspinner);
+        final Spinner pmodeSpinner = myView.findViewById(R.id.pmodespinner);
         final EditText amount = myView.findViewById(R.id.amount);
+        final EditText note = myView.findViewById(R.id.note);
         final Button cancel = myView.findViewById(R.id.cancel);
         final Button save = myView.findViewById(R.id.save);
+
+        pmodeSpinner.setVisibility(View.VISIBLE);
+        note.setVisibility(View.VISIBLE);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String budgetAmount = amount.getText().toString();
-                String budgetItem = itemSpinner.getSelectedItem().toString();
+                String expenseAmount = amount.getText().toString();
+                String expenseItem = itemSpinner.getSelectedItem().toString();
+                String expenseMode = pmodeSpinner.getSelectedItem().toString();
+                String notes = note.getText().toString();
 
-                if (TextUtils.isEmpty(budgetAmount)){
+                if (TextUtils.isEmpty(expenseAmount)){
                     amount.setError("Amount is required!");
                     return;
                 }
 
-                if (budgetItem.equals("Select item")){
-                    Toast.makeText(BudgetActivity.this, "Select a valid item", Toast.LENGTH_SHORT).show();
+                if (expenseMode.equals("Mode of Payment")){
+                    Toast.makeText(ExpenseActivity.this, "Select a valid payment mode", Toast.LENGTH_SHORT).show();
+                }
+
+                if (expenseItem.equals("Select item")){
+                    Toast.makeText(ExpenseActivity.this, "Select a valid item", Toast.LENGTH_SHORT).show();
                 }
 
                 else {
@@ -142,7 +153,7 @@ public class BudgetActivity extends AppCompatActivity {
                     loader.setCanceledOnTouchOutside(false);
                     loader.show();
 
-                    String id  = budgetRef.push().getKey();
+                    String id  = expenseRef.push().getKey();
                     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     Calendar cal = Calendar.getInstance();
                     String date = dateFormat.format(cal.getTime());
@@ -153,18 +164,18 @@ public class BudgetActivity extends AppCompatActivity {
                     Weeks weeks = Weeks.weeksBetween(epoch, now);
                     Months months = Months.monthsBetween(epoch, now);
 
-                    String itemNday = budgetItem+date;
-                    String itemNweek = budgetItem+weeks.getWeeks();
-                    String itemNmonth = budgetItem+months.getMonths();
+                    String itemNday = expenseItem+date;
+                    String itemNweek = expenseItem+weeks.getWeeks();
+                    String itemNmonth = expenseItem+months.getMonths();
 
-                    Data data = new Data(budgetItem, null, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(budgetAmount), weeks.getWeeks(), months.getMonths(), null);
-                    budgetRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    Data data = new Data(expenseItem, expenseMode, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(expenseAmount), weeks.getWeeks(), months.getMonths(), notes);
+                    expenseRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
-                                Toast.makeText(BudgetActivity.this, "Budget item added successfuly", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ExpenseActivity.this, "Budget item added successfuly", Toast.LENGTH_SHORT).show();
                             }else {
-                                Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
 
                             loader.dismiss();
@@ -192,7 +203,7 @@ public class BudgetActivity extends AppCompatActivity {
         super.onStart();
 
         FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>()
-                .setQuery(budgetRef, Data.class)
+                .setQuery(expenseRef, Data.class)
                 .build();
 
         FirebaseRecyclerAdapter<Data, MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
@@ -202,6 +213,11 @@ public class BudgetActivity extends AppCompatActivity {
                 holder.setItemAmount("Amount: $"+ model.getAmount());
                 holder.setDate("On: "+model.getDate());
                 holder.setItemName("Item: "+model.getItem());
+                holder.setModeName("Payment Mode: "+model.getMode());
+                holder.setNotes("Notes: "+model.getNotes());
+
+                holder.notes.setVisibility(View.VISIBLE);
+//                holder.notes.setVisibility(View.GONE);
 
                 switch (model.getItem()){
                     case "Transport":
@@ -241,6 +257,7 @@ public class BudgetActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         post_key = getRef(position).getKey();
                         item = model.getItem();
+                        mode = model.getMode();
                         amount = model.getAmount();
                         updateData();
                     }
@@ -266,19 +283,30 @@ public class BudgetActivity extends AppCompatActivity {
     public class MyViewHolder extends RecyclerView.ViewHolder{
         View mView;
         public ImageView imageView;
-        public TextView date;
+        public TextView notes, date;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
             imageView = itemView.findViewById(R.id.imageView);
+            notes = itemView.findViewById(R.id.note);
             date = itemView.findViewById(R.id.date);
+            final TextView mNotes = mView.findViewById(R.id.note);
+
+            mNotes.setVisibility(View.VISIBLE);
 
         }
 
         public  void setItemName (String itemName){
             TextView item = mView.findViewById(R.id.item);
             item.setText(itemName);
+        }
+
+        public  void setModeName (String modeName){
+            TextView mode = mView.findViewById(R.id.mode);
+            mode.setText(modeName);
+            mode.setVisibility(View.VISIBLE);
         }
 
         public void setItemAmount(String itemAmount){
@@ -289,6 +317,11 @@ public class BudgetActivity extends AppCompatActivity {
         public void setDate(String itemDate){
             TextView date = mView.findViewById(R.id.date);
             date.setText(itemDate);
+        }
+
+        public void setNotes(String notes){
+            TextView note = mView.findViewById(R.id.note);
+            note.setText(notes);
         }
     }
     private void updateData() {
@@ -303,7 +336,7 @@ public class BudgetActivity extends AppCompatActivity {
         final EditText mAmount = mView.findViewById(R.id.amount);
         final EditText mNotes = mView.findViewById(R.id.note);
 
-        mNotes.setVisibility(View.GONE);
+        mNotes.setVisibility(View.VISIBLE);
 
         mItem.setText(item);
 
@@ -333,14 +366,14 @@ public class BudgetActivity extends AppCompatActivity {
                 String itemNweek = item + weeks.getWeeks();
                 String itemNmonth = item + months.getMonths();
 
-                Data data = new Data(item, null, date, post_key, itemNday, itemNweek, itemNmonth, amount, weeks.getWeeks(), months.getMonths(), null);
-                budgetRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                Data data = new Data(item, mode, date, post_key, itemNday, itemNweek, itemNmonth, amount, weeks.getWeeks(), months.getMonths(), null);
+                expenseRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(BudgetActivity.this, "Updated successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ExpenseActivity.this, "Updated successfully", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -354,13 +387,13 @@ public class BudgetActivity extends AppCompatActivity {
         delBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                budgetRef.child(post_key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                expenseRef.child(post_key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(BudgetActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ExpenseActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }

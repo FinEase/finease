@@ -21,6 +21,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="mode"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:id="@+id/mode"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="item"
                 android:textStyle="bold"
                 android:textColor="#000"
@@ -37,6 +46,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:text="note"
                 android:textStyle="bold"
                 android:textColor="#000"
