@@ -4,134 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainactivity_bg"
+    android:background="@drawable/bg_2"
     tools:context=".MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:id="@+id/toolbar"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-        <TableLayout
-            android:id="@+id/table"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:layout_below="@+id/toolbar">
-
-            <TableRow>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Budget"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Week"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Month"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Remaining"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/bugdetTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="$0"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/weekTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="$0"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/monthTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="$0"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/remainingTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="$0"
-                    android:textColor="#0000FF"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:background="@drawable/borders"
-                    android:padding="5dp"
-                    android:textSize="12sp"/>
-            </TableRow>
-        </TableLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/table">
+        android:layout_height="match_parent">
 
         <GridLayout
             android:id="@+id/gridLayout"
@@ -142,7 +21,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:columnCount="2"
-            android:rowCount="3">
+            android:rowCount="3"
+            >
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/AddSpendings"
@@ -153,8 +33,10 @@
                 android:layout_column="0"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
-                android:layout_margin="10dp"
-                android:background="#fff">
+                android:layout_margin="20dp"
+                app:cardCornerRadius="10dp"
+                android:background="#fff"
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -164,16 +46,18 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/spend" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/spending_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add Spendings"
+                        android:text="Add Spending"
                         android:textAlignment="center"
-                        android:textColor="#0000FF"
+                        android:textColor="#00b8e6"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/berlinsans"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -190,7 +74,8 @@
                 android:layout_column="1"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="10dp"
                 android:background="#fff">
 
                 <LinearLayout
@@ -201,16 +86,18 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/viewexpense" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/viewexpense_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="View Expense"
                         android:textAlignment="center"
-                        android:textColor="#0000FF"
+                        android:textColor="#00b8e6"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/berlinsans"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -227,7 +114,8 @@
                 android:layout_column="0"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="10dp"
                 android:background="#fff">
 
                 <LinearLayout
@@ -238,16 +126,18 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/budget" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/budget_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="My Budget"
                         android:textAlignment="center"
-                        android:textColor="#0000FF"
+                        android:textColor="#00b8e6"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/berlinsans"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -264,7 +154,8 @@
                 android:layout_column="1"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="10dp"
                 android:background="#fff">
 
                 <LinearLayout
@@ -275,16 +166,18 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/analytics" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/analytics_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Analytics"
                         android:textAlignment="center"
-                        android:textColor="#0000FF"
+                        android:textColor="#00b8e6"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/berlinsans"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -301,7 +194,8 @@
                 android:layout_column="0"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="10dp"
                 android:background="#fff">
 
                 <LinearLayout
@@ -312,16 +206,18 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/help" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/help_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Help"
                         android:textAlignment="center"
-                        android:textColor="#0000FF"
+                        android:textColor="#00b8e6"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/berlinsans"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -338,7 +234,8 @@
                 android:layout_column="1"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="10dp"
                 android:background="#fff">
 
                 <LinearLayout
@@ -349,16 +246,18 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/export" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/export_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Export File"
                         android:textAlignment="center"
-                        android:textColor="#0000FF"
+                        android:textColor="#00b8e6"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/berlinsans"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -366,20 +265,6 @@
 
 
         </GridLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#000"
-            android:src="@drawable/ic_add"
-            app:fabSize="normal" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
