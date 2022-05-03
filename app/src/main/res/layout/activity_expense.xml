@@ -32,7 +32,7 @@
             android:layout_gravity="bottom|end"
             app:fabSize="normal"
             android:id="@+id/fab"
-            app:backgroundTint="#000"
+            app:backgroundTint="#fff"
             android:src="@drawable/ic_add"
             android:layout_margin="16dp"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

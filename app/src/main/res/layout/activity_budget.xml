@@ -21,11 +21,12 @@
         android:id="@+id/totalBudgetAmountTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="total Budget amount: $0"
+        android:text="Monthly Budget: €0"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:fontFamily="@font/berlinsans"
         android:textAlignment="center"
-        android:textColor="#000"
+        android:textColor="#00b8e6"
         android:layout_marginTop="5dp"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -35,7 +36,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
             android:layout_gravity="bottom|end"
             app:fabSize="normal"
             android:id="@+id/fab"
-            app:backgroundTint="#000"
+            app:backgroundTint="#fff"
             android:src="@drawable/ic_add"
             android:layout_margin="16dp"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

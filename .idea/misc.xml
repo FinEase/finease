@@ -3,13 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.141" />
         <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_add.xml" value="0.208" />
-        <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_budget.xml" value="0.2056434373663959" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_analytics.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_education.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_entertainment.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_food.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_health.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_history.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_home.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_house.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_launcher_background.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_more.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_other.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_person.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_person_account.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_personalcare.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_settings.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_transport.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_budget.xml" value="0.2030392570704939" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_expense.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_login.xml" value="0.25052083333333336" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_main.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_registration.xml" value="0.25052083333333336" />
-        <entry key="..\:/Codes/finease/app/src/main/res/layout/input_layout.xml" value="0.1" />
+        <entry key="..\:/Codes/finease/app/src/main/res/layout/input_layout.xml" value="0.2030392570704939" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/retrieve_layout.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/update_layout.xml" value="0.2056434373663959" />
         <entry key="..\:/Users/neeth/Desktop/ISEE Project/finease/app/src/main/res/layout/activity_main.xml" value="0.1453804347826087" />

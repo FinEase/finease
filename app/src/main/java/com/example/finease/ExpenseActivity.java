@@ -210,7 +210,7 @@ public class ExpenseActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull final Data model) {
 
-                holder.setItemAmount("Amount: $"+ model.getAmount());
+                holder.setItemAmount("Amount: €"+ model.getAmount());
                 holder.setDate("On: "+model.getDate());
                 holder.setItemName("Item: "+model.getItem());
                 holder.setModeName("Payment Mode: "+model.getMode());
