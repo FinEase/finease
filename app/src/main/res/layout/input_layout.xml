@@ -4,15 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:elevation="10dp"
-    app:cardElevation="10dp"
+    app:cardElevation="100dp"
     android:layout_marginTop="10dp"
-    android:background="@android:color/transparent"
+    android:backgroundTint="#fff"
     app:cardCornerRadius="20dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="#000"
+        app:cardCornerRadius="50dp"
         android:orientation="vertical">
 
         <TextView
@@ -34,49 +37,67 @@
                 android:id="@+id/pmodespinner"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:entries="@array/mode"
                 android:layout_gravity="center"
+                android:spinnerMode="dropdown"
                 android:layout_marginBottom="20dp"
-                android:backgroundTint="#e6f7ff">
+                android:background="@null">
             </Spinner>
             <Spinner
                 android:id="@+id/itemspinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:entries="@array/items"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
                 android:spinnerMode="dropdown"
-                android:background="@android:color/transparent">
+                android:background="@null">
             </Spinner>
-
+            <Button
+                android:id="@+id/datePickerButton"
+                android:visibility="gone"
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="JAN 01 2020"
+                android:textSize="15sp"
+                android:fontFamily="serif"
+                android:textColor="#00b8e6"
+                style="?android:spinnerStyle"
+                android:onClick="openDatePicker"/>
+            </LinearLayout>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Amount..."
                 android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
                 android:inputType="number"
                 android:id="@+id/amount"
                 android:textColor="#000"
                 android:fontFamily="serif"
                 android:alpha="0.5"
                 android:textColorHint="#000"/>
+
             <EditText
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
                 android:hint="Enter Note..."
                 android:id="@+id/note"
                 android:textColor="#000"
                 android:fontFamily="serif"
                 android:alpha="0.5"
                 android:textColorHint="#000"/>
-        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,7 +138,5 @@
                     android:layout_margin="2dp"/>
             </RelativeLayout>
         </LinearLayout>
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

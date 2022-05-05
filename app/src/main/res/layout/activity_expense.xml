@@ -17,6 +17,18 @@
     <!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
     <!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
 
+    <TextView
+        android:id="@+id/totalBudgetAmountTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This Month's Spendings"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/berlinsans"
+        android:textAlignment="center"
+        android:textColor="#00b8e6"
+        android:layout_marginTop="5dp"/>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

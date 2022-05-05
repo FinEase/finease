@@ -1,21 +1,28 @@
 package com.example.finease;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+//import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +47,10 @@ import org.joda.time.Weeks;
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 public class ExpenseActivity extends AppCompatActivity {
@@ -51,7 +60,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
     private FloatingActionButton fab;
 
-    private DatabaseReference expenseRef, personalRef;
+    private DatabaseReference expenseRef;
     private FirebaseAuth mAuth;
     private ProgressDialog loader;
 
@@ -60,6 +69,9 @@ public class ExpenseActivity extends AppCompatActivity {
     private String mode = "";
     private int amount = 0;
 
+    private DatePickerDialog datePickerDialog;
+    private Button dateButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +79,6 @@ public class ExpenseActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         expenseRef = FirebaseDatabase.getInstance().getReference().child("expenses").child(mAuth.getCurrentUser().getUid());
-        personalRef = FirebaseDatabase.getInstance().getReference("personal").child(mAuth.getCurrentUser().getUid());
         loader = new ProgressDialog(this);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -105,6 +116,7 @@ public class ExpenseActivity extends AppCompatActivity {
                 additem();
             }
         });
+
     }
 
     private void additem() {
@@ -122,9 +134,28 @@ public class ExpenseActivity extends AppCompatActivity {
         final EditText note = myView.findViewById(R.id.note);
         final Button cancel = myView.findViewById(R.id.cancel);
         final Button save = myView.findViewById(R.id.save);
+        final Button date = myView.findViewById(R.id.datePickerButton);
+
+        initDatePicker();
+        dateButton = myView.findViewById(R.id.datePickerButton);
+        dateButton.setText(getTodaysDate());
+
+        ArrayAdapter adapter_items = ArrayAdapter.createFromResource(this,
+                R.array.items, R.layout.spinner_item);
+
+        adapter_items.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        itemSpinner.setAdapter(adapter_items);
+
+
+        ArrayAdapter adapter_pmode = ArrayAdapter.createFromResource(this,
+                R.array.mode, R.layout.spinner_item);
+
+        adapter_pmode.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        pmodeSpinner.setAdapter(adapter_pmode);
 
         pmodeSpinner.setVisibility(View.VISIBLE);
         note.setVisibility(View.VISIBLE);
+        date.setVisibility(View.VISIBLE);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +165,7 @@ public class ExpenseActivity extends AppCompatActivity {
                 String expenseItem = itemSpinner.getSelectedItem().toString();
                 String expenseMode = pmodeSpinner.getSelectedItem().toString();
                 String notes = note.getText().toString();
+                String dt = dateButton.getText().toString();
 
                 if (TextUtils.isEmpty(expenseAmount)){
                     amount.setError("Amount is required!");
@@ -154,26 +186,37 @@ public class ExpenseActivity extends AppCompatActivity {
                     loader.show();
 
                     String id  = expenseRef.push().getKey();
-                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    String date_old = dt;
+                    String date = null;
+                    Date dt_1 = null;
+                    SimpleDateFormat dt_format = new SimpleDateFormat("dd-MM-yyyy");
+                    try {
+                        dt_1 = dt_format.parse(date_old);
+                        date = dt_format.format(dt_1);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+//                    MutableDateTime epoch = new MutableDateTime();
+//                    epoch.setDate(0);
+//                    DateTime now = new DateTime();
+//                    Weeks weeks = Weeks.weeksBetween(epoch, now);
+//                    Months months = Months.monthsBetween(epoch, now);
                     Calendar cal = Calendar.getInstance();
-                    String date = dateFormat.format(cal.getTime());
-
-                    MutableDateTime epoch = new MutableDateTime();
-                    epoch.setDate(0);
-                    DateTime now = new DateTime();
-                    Weeks weeks = Weeks.weeksBetween(epoch, now);
-                    Months months = Months.monthsBetween(epoch, now);
-
+                    cal.setTime(dt_1);
+                    int month = cal.get(Calendar.MONTH) + 1;
                     String itemNday = expenseItem+date;
-                    String itemNweek = expenseItem+weeks.getWeeks();
-                    String itemNmonth = expenseItem+months.getMonths();
+//                    String itemNweek = expenseItem+weeks.getWeeks();
+                    String itemNweek = null;
+                    int week = 0;
+                    String itemNmonth = expenseItem+month;
 
-                    Data data = new Data(expenseItem, expenseMode, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(expenseAmount), weeks.getWeeks(), months.getMonths(), notes);
+                    Data data = new Data(expenseItem, expenseMode, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(expenseAmount), week, month, notes);
                     expenseRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
-                                Toast.makeText(ExpenseActivity.this, "Budget item added successfuly", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ExpenseActivity.this, "Budget item added successfully", Toast.LENGTH_SHORT).show();
                             }else {
                                 Toast.makeText(ExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
@@ -201,9 +244,11 @@ public class ExpenseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        DateTime now = new DateTime();
 
+        Query query = expenseRef.orderByChild("month").equalTo(now.getMonthOfYear());
         FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>()
-                .setQuery(expenseRef, Data.class)
+                .setQuery(query, Data.class)
                 .build();
 
         FirebaseRecyclerAdapter<Data, MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
@@ -217,7 +262,6 @@ public class ExpenseActivity extends AppCompatActivity {
                 holder.setNotes("Notes: "+model.getNotes());
 
                 holder.notes.setVisibility(View.VISIBLE);
-//                holder.notes.setVisibility(View.GONE);
 
                 switch (model.getItem()){
                     case "Transport":
@@ -284,6 +328,7 @@ public class ExpenseActivity extends AppCompatActivity {
         View mView;
         public ImageView imageView;
         public TextView notes, date;
+        public Button dates;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -292,10 +337,6 @@ public class ExpenseActivity extends AppCompatActivity {
             imageView = itemView.findViewById(R.id.imageView);
             notes = itemView.findViewById(R.id.note);
             date = itemView.findViewById(R.id.date);
-            final TextView mNotes = mView.findViewById(R.id.note);
-
-            mNotes.setVisibility(View.VISIBLE);
-
         }
 
         public  void setItemName (String itemName){
@@ -305,8 +346,8 @@ public class ExpenseActivity extends AppCompatActivity {
 
         public  void setModeName (String modeName){
             TextView mode = mView.findViewById(R.id.mode);
-            mode.setText(modeName);
             mode.setVisibility(View.VISIBLE);
+            mode.setText(modeName);
         }
 
         public void setItemAmount(String itemAmount){
@@ -351,22 +392,34 @@ public class ExpenseActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 amount = Integer.parseInt(mAmount.getText().toString());
+                String notes = mNotes.getText().toString();
+
+
+//                MutableDateTime epoch = new MutableDateTime();
+//                epoch.setDate(0);
+//                DateTime now = new DateTime();
+//                Weeks weeks = Weeks.weeksBetween(epoch, now);
+//                Months months = Months.monthsBetween(epoch, now);
 
                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                Calendar cal = Calendar.getInstance();
-                String date = dateFormat.format(cal.getTime());
+                Date date = new Date();
+                String dt_1 = dateFormat.format(date);
 
-                MutableDateTime epoch = new MutableDateTime();
-                epoch.setDate(0);
-                DateTime now = new DateTime();
-                Weeks weeks = Weeks.weeksBetween(epoch, now);
-                Months months = Months.monthsBetween(epoch, now);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                int month = cal.get(Calendar.MONTH) + 1;
+
+//                String itemNday = expenseItem+date;
+//                String itemNweek = expenseItem+weeks.getWeeks();
+                String itemNweek = null;
+                int week = 0;
+//                String itemNmonth = expenseItem+month;
 
                 String itemNday = item + date;
-                String itemNweek = item + weeks.getWeeks();
-                String itemNmonth = item + months.getMonths();
+//                String itemNweek = item + week;
+                String itemNmonth = item + month;
 
-                Data data = new Data(item, mode, date, post_key, itemNday, itemNweek, itemNmonth, amount, weeks.getWeeks(), months.getMonths(), null);
+                Data data = new Data(item, mode, dt_1, post_key, itemNday, itemNweek, itemNmonth, amount, week, month, notes);
                 expenseRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -402,5 +455,45 @@ public class ExpenseActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    private String getTodaysDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return day + "-" + month + "-" + year;
+    }
+
+    private void initDatePicker()
+    {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day)
+            {
+                month = month + 1;
+                String date = day + "-" + month + "-" + year;
+                dateButton.setText(date);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+    }
+
+    public void openDatePicker(View view)
+    {
+        datePickerDialog.show();
     }
 }
