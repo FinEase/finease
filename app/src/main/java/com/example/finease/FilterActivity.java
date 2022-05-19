@@ -70,6 +70,10 @@ public class FilterActivity extends AppCompatActivity implements AdapterView.OnI
         valueSpinner = (Spinner) findViewById(R.id.filtervaluespinner);
         filterSpinner.setOnItemSelectedListener(this);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.filter, R.layout.spinner_dropdown_item);
+        filterSpinner.setAdapter(adapter);
+
         mAuth = FirebaseAuth.getInstance();
         expenseRef = FirebaseDatabase.getInstance().getReference().child("expenses").child(mAuth.getCurrentUser().getUid());
         loader = new ProgressDialog(this);
@@ -116,6 +120,9 @@ public class FilterActivity extends AppCompatActivity implements AdapterView.OnI
     public void onItemSelected(AdapterView<?> parent, View arg1, int pos,
                                long arg2) {
         parent.getItemAtPosition(pos);
+        if (pos == 0) {
+            valueSpinner.setVisibility(View.GONE);
+        }
         if (pos == 1) {
             valueSpinner.setVisibility(View.VISIBLE);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter
