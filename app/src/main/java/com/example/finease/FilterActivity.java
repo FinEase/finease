@@ -59,6 +59,7 @@ public class FilterActivity extends AppCompatActivity implements AdapterView.OnI
     private int amount = 0;
 
     Spinner filterSpinner, valueSpinner;
+    private EditText amountfield;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,21 +117,27 @@ public class FilterActivity extends AppCompatActivity implements AdapterView.OnI
                                long arg2) {
         parent.getItemAtPosition(pos);
         if (pos == 1) {
+            valueSpinner.setVisibility(View.VISIBLE);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter
                     .createFromResource(this, R.array.mode,
                             R.layout.spinner_dropdown_item);
             valueSpinner.setAdapter(adapter);
         } else if (pos == 2) {
+            valueSpinner.setVisibility(View.VISIBLE);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter
                     .createFromResource(this, R.array.items,
                             R.layout.spinner_dropdown_item);
             valueSpinner.setAdapter(adapter);
         } else if (pos == 3) {
+            valueSpinner.setVisibility(View.VISIBLE);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter
                     .createFromResource(this, R.array.month,
                             R.layout.spinner_dropdown_item);
             valueSpinner.setAdapter(adapter);
         } else if (pos == 4) {
+            amountfield = findViewById(R.id.amount);
+            amountfield.setVisibility(View.VISIBLE);
+            valueSpinner.setVisibility(View.GONE);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter
                     .createFromResource(this, R.array.items,
                             R.layout.spinner_dropdown_item);
@@ -296,9 +303,12 @@ public class FilterActivity extends AppCompatActivity implements AdapterView.OnI
             if (fil11 == "month"){
                 pos = valueSpinner.getSelectedItemPosition();
             }
+            else if (fil11 == "amount"){
+                pos = Integer.valueOf(amountfield.getText().toString());
+            }
             Log.d("fil1", fil11);
             Log.d("fil2", fil22);
-            if (fil11 == "month") {
+            if (fil11 == "month" || fil11 == "amount") {
                 query = expenseRef.orderByChild(fil11).equalTo(pos);
             }
             else {

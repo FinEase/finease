@@ -36,6 +36,15 @@
             android:spinnerMode="dropdown"
             android:background="@null">
         </Spinner>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Amount"
+            android:id="@+id/amount"
+            android:visibility="gone"
+            android:fontFamily="serif"
+            android:alpha="0.5"
+            android:textColorHint="#000"/>
         <Button
             android:id="@+id/filtersubmit"
             android:layout_width="100dp"
