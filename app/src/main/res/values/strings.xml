@@ -22,4 +22,28 @@
         <item>Account</item>
         <item>Other</item>
     </string-array>
+
+    <string-array name="filter">
+        <item>Select a Filter</item>
+        <item>Mode of Payment</item>
+        <item>Category</item>
+        <item>Month</item>
+        <item>Amount</item>
+    </string-array>
+
+    <string-array name="month">
+        <item>Select a Month</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

@@ -11,6 +11,9 @@
         android:theme="@style/Theme.FinEase">
 
         <activity
+            android:name=".FilterActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExpenseActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_2"
+    tools:context=".ExpenseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <Spinner
+            android:id="@+id/filterspinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:entries="@array/filter"
+            android:layout_gravity="center"
+            android:spinnerMode="dropdown"
+            android:layout_marginBottom="20dp"
+            android:background="@null">
+        </Spinner>
+        <Spinner
+            android:id="@+id/filtervaluespinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:entries="@array/items"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:spinnerMode="dropdown"
+            android:background="@null">
+        </Spinner>
+        <Button
+            android:id="@+id/filtersubmit"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:backgroundTint="#1ab2ff"
+            android:layout_margin="2dp"/>
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</LinearLayout>

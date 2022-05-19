@@ -10,7 +10,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView budgetCardView, expenseCardView;
+    private CardView budgetCardView, expenseCardView, filterCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         budgetCardView = findViewById(R.id.MyBudget);
         expenseCardView = findViewById(R.id.AddSpendings);
+        filterCardView = findViewById(R.id.ViewExpense);
 
         budgetCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ExpenseActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        filterCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, FilterActivity.class);
                 startActivity(intent);
             }
         });
