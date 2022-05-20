@@ -43,6 +43,7 @@
             android:visibility="gone"
             android:fontFamily="serif"
             android:alpha="0.5"
+            android:inputType="number"
             android:textColorHint="#000"/>
         <Button
             android:id="@+id/filtersubmit"
