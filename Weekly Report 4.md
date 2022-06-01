@@ -1,4 +1,4 @@
-# Weekly Report 3 
+# Weekly Report 4
 ## Project FinEase
 ## Topic Money Control
 
@@ -16,12 +16,6 @@ Tasks left for us to complete: Create a functionality called filter to view and 
 Person handling this issue: Neethu
 
 Reporting: Lakshmipriya
-
-Screenshots for reference:
-![1](https://user-images.githubusercontent.com/104211966/169456920-a2896f78-5116-4248-843c-db03c3b164da.png)
-![2](https://user-images.githubusercontent.com/104211966/169456939-0b50c9a2-27e4-4dcf-84a5-009fb6c999b7.png)
-![3](https://user-images.githubusercontent.com/104211966/169456951-60c674a1-eb3d-4926-9607-a8083289a0d5.png)
-
 
 
 Thanks and regards 
