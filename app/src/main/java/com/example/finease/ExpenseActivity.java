@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,6 +50,7 @@ import org.w3c.dom.Text;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -97,7 +99,7 @@ public class ExpenseActivity extends AppCompatActivity {
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
                     totalAmount += data.getAmount();
-//                    String sTotal = String.valueOf("Month budget: $" + totalAmount);
+//                    String sTotal = String.valueOf("Month Expense: $" + totalAmount);
 //                    totalBudgetAmountTextView.setText(sTotal);
                 }
             }
@@ -136,15 +138,23 @@ public class ExpenseActivity extends AppCompatActivity {
         final Button save = myView.findViewById(R.id.save);
         final Button date = myView.findViewById(R.id.datePickerButton);
 
+        final CheckBox checkBox = myView.findViewById(R.id.CheckBox);
+        final Spinner recurspinner = myView.findViewById(R.id.recurspinner);
+        final Spinner currencyspinner = myView.findViewById(R.id.currencySpinner);
+
         initDatePicker();
         dateButton = myView.findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
 
         ArrayAdapter adapter_items = ArrayAdapter.createFromResource(this,
                 R.array.items, R.layout.spinner_item);
+        ArrayAdapter adapter_recur = ArrayAdapter.createFromResource(this,
+                R.array.recurring_frequency, R.layout.spinner_item);
 
         adapter_items.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        adapter_recur.setDropDownViewResource(R.layout.spinner_dropdown_item);
         itemSpinner.setAdapter(adapter_items);
+        recurspinner.setAdapter(adapter_recur);
 
 
         ArrayAdapter adapter_pmode = ArrayAdapter.createFromResource(this,
@@ -157,6 +167,16 @@ public class ExpenseActivity extends AppCompatActivity {
         note.setVisibility(View.VISIBLE);
         date.setVisibility(View.VISIBLE);
 
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkBox.isChecked()) {
+                    recurspinner.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,6 +186,23 @@ public class ExpenseActivity extends AppCompatActivity {
                 String expenseMode = pmodeSpinner.getSelectedItem().toString();
                 String notes = note.getText().toString();
                 String dt = dateButton.getText().toString();
+                int curr_int = currencyspinner.getSelectedItemPosition();
+                int frequency = recurspinner.getSelectedItemPosition();
+
+                String curr = "€";
+
+                if (curr_int == 0) {
+                    curr = "€";
+                }
+                if (curr_int == 1) {
+                    curr = "£";
+                }
+                if (curr_int == 2) {
+                    curr = "$";
+                }
+                if (curr_int == 3) {
+                    curr = "₹";
+                }
 
                 if (TextUtils.isEmpty(expenseAmount)){
                     amount.setError("Amount is required!");
@@ -181,14 +218,14 @@ public class ExpenseActivity extends AppCompatActivity {
                 }
 
                 else {
-                    loader.setMessage("adding a budget item");
+                    loader.setMessage("adding the expense item");
                     loader.setCanceledOnTouchOutside(false);
                     loader.show();
 
-                    String id  = expenseRef.push().getKey();
                     String date_old = dt;
                     String date = null;
                     Date dt_1 = null;
+                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     SimpleDateFormat dt_format = new SimpleDateFormat("dd-MM-yyyy");
                     try {
                         dt_1 = dt_format.parse(date_old);
@@ -197,35 +234,79 @@ public class ExpenseActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-//                    MutableDateTime epoch = new MutableDateTime();
-//                    epoch.setDate(0);
-//                    DateTime now = new DateTime();
-//                    Weeks weeks = Weeks.weeksBetween(epoch, now);
-//                    Months months = Months.monthsBetween(epoch, now);
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(dt_1);
                     int month = cal.get(Calendar.MONTH) + 1;
-                    String itemNday = expenseItem+date;
+                    String itemNday = expenseItem + date;
 //                    String itemNweek = expenseItem+weeks.getWeeks();
                     String itemNweek = null;
                     int week = 0;
-                    String itemNmonth = expenseItem+month;
+                    String itemNmonth = expenseItem + month;
 
-                    Data data = new Data(expenseItem, expenseMode, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(expenseAmount), week, month, notes);
-                    expenseRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                Toast.makeText(ExpenseActivity.this, "Budget item added successfully", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(ExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                    Calendar cal1 = Calendar.getInstance();
+                    cal1.setTime(cal.getTime());
+                    Calendar lastDayOfCurrentYear = Calendar.getInstance();
+                    lastDayOfCurrentYear.set(Calendar.DATE, 31);
+                    lastDayOfCurrentYear.set(Calendar.MONTH, 11);
+
+                    Calendar lastDayOfCurrentMonth = Calendar.getInstance();
+                    lastDayOfCurrentMonth.add(Calendar.MONTH, 1);
+                    lastDayOfCurrentMonth.set(Calendar.DATE, 1);
+                    lastDayOfCurrentMonth.add(Calendar.DATE, -1);
+                    ArrayList<Date> dates = new ArrayList<Date>();
+                    if (checkBox.isChecked()) {
+                        if (frequency == 1) {
+                            while(!cal1.after(lastDayOfCurrentMonth))
+                            {
+                                dates.add(cal1.getTime());
+                                cal1.add(Calendar.WEEK_OF_MONTH, 1);
                             }
-
-                            loader.dismiss();
                         }
-                    });
+                        else if (frequency == 2) {
+                            while(!cal1.after(lastDayOfCurrentYear))
+                            {
+                                dates.add(cal1.getTime());
+                                cal1.add(Calendar.MONTH, 1);
+                            }
+                        }
+                    };
+                    if (checkBox.isChecked()) {
+                        for (int i = 0; i < dates.size(); i++) {
+                            String id = expenseRef.push().getKey();
+                            month = dates.get(i).getMonth() + 1;
+                            Data data = new Data(expenseItem, expenseMode, dateFormat.format(dates.get(i)), id, itemNday, itemNweek, itemNmonth, Integer.parseInt(expenseAmount), week, month, curr, notes);
+                            expenseRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(ExpenseActivity.this, "Expense item added successfully", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(ExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    loader.dismiss();
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        String id = expenseRef.push().getKey();
+                        Data data = new Data(expenseItem, expenseMode, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(expenseAmount), week, month, curr, notes);
+                        expenseRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ExpenseActivity.this, "Expense item added successfully", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                loader.dismiss();
+                            }
+                        });
+                    }
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
             }
         });
 
@@ -246,6 +327,7 @@ public class ExpenseActivity extends AppCompatActivity {
         super.onStart();
         DateTime now = new DateTime();
 
+
         Query query = expenseRef.orderByChild("month").equalTo(now.getMonthOfYear());
         FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>()
                 .setQuery(query, Data.class)
@@ -255,7 +337,8 @@ public class ExpenseActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull final Data model) {
 
-                holder.setItemAmount("Amount: €"+ model.getAmount());
+                String curr = model.getCurr();
+                holder.setItemAmount(curr + model.getAmount());
                 holder.setDate("On: "+model.getDate());
                 holder.setItemName("Item: "+model.getItem());
                 holder.setModeName("Payment Mode: "+model.getMode());
@@ -376,6 +459,7 @@ public class ExpenseActivity extends AppCompatActivity {
         final TextView mItem = mView.findViewById(R.id.itemName);
         final EditText mAmount = mView.findViewById(R.id.amount);
         final EditText mNotes = mView.findViewById(R.id.note);
+        final Spinner mCurr = mView.findViewById(R.id.currencySpinner);
 
         mNotes.setVisibility(View.VISIBLE);
 
@@ -393,6 +477,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
                 amount = Integer.parseInt(mAmount.getText().toString());
                 String notes = mNotes.getText().toString();
+                int curr_int = mCurr.getSelectedItemPosition();
 
 
 //                MutableDateTime epoch = new MutableDateTime();
@@ -419,7 +504,23 @@ public class ExpenseActivity extends AppCompatActivity {
 //                String itemNweek = item + week;
                 String itemNmonth = item + month;
 
-                Data data = new Data(item, mode, dt_1, post_key, itemNday, itemNweek, itemNmonth, amount, week, month, notes);
+                String curr = "€";
+
+                if (curr_int == 0) {
+                    curr = "€";
+                }
+                if (curr_int == 1) {
+                    curr = "£";
+                }
+                if (curr_int == 2) {
+                    curr = "$";
+                }
+                if (curr_int == 3) {
+                    curr = "₹";
+                }
+
+
+                Data data = new Data(item, mode, dt_1, post_key, itemNday, itemNweek, itemNmonth, amount, week, month, curr, notes);
                 expenseRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

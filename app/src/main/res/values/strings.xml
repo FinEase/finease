@@ -46,4 +46,15 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string-array name="recurring_frequency">
+        <item>Select Frequency</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+    <string-array name="currencies">
+        <item>Euro (€)</item>
+        <item>Pound (£)</item>
+        <item>Dollar ($)</item>
+        <item>Rupee (₹)</item>
+    </string-array>
 </resources>

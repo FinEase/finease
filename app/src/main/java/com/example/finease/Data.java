@@ -4,12 +4,12 @@ public class Data {
 
     String item, mode, date,id,itemNday,itemNweek,itemNmonth;
     int amount,week,month;
-    String notes;
+    String notes, curr;
 
     public Data() {
     }
 
-    public Data(String item, String mode, String date, String id, String itemNday, String itemNweek, String itemNmonth, int amount, int week, int month, String notes) {
+    public Data(String item, String mode, String date, String id, String itemNday, String itemNweek, String itemNmonth, int amount, int week, int month, String curr, String notes) {
         this.item = item;
         this.mode = mode;
         this.date = date;
@@ -20,6 +20,7 @@ public class Data {
         this.amount = amount;
         this.week = week;
         this.month = month;
+        this.curr = curr;
         this.notes = notes;
     }
 
@@ -101,6 +102,14 @@ public class Data {
 
     public void setMonth(int month) {
         this.month = month;
+    }
+
+    public String getCurr() {
+        return curr;
+    }
+
+    public void setcurr(String curr) {
+        this.curr = curr;
     }
 
     public String getNotes() {
