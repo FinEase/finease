@@ -171,7 +171,8 @@ public class FilterActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull final Data model) {
 
-                holder.setItemAmount("Amount: €"+ model.getAmount());
+                String curr = model.getCurr();
+                holder.setItemAmount(curr + model.getAmount());
                 holder.setDate("On: "+model.getDate());
                 holder.setItemName("Item: "+model.getItem());
                 holder.setModeName("Payment Mode: "+model.getMode());
@@ -329,7 +330,8 @@ public class FilterActivity extends AppCompatActivity implements AdapterView.OnI
                 @Override
                 protected void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull final Data model) {
 
-                    holder.setItemAmount("Amount: €" + model.getAmount());
+                    String curr = model.getCurr();
+                    holder.setItemAmount(curr + model.getAmount());
                     holder.setDate("On: " + model.getDate());
                     holder.setItemName("Item: " + model.getItem());
                     holder.setModeName("Payment Mode: " + model.getMode());
