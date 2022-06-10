@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -75,9 +76,9 @@ public class Analytics extends AppCompatActivity {
         totalBudgetAmountTextView = findViewById(R.id.totalBudgetAmountTextView);
 
         //general analytic
-        monthSpentAmount = findViewById(R.id.monthSpentAmount);
+//        monthSpentAmount = findViewById(R.id.monthSpentAmount);
         linearLayoutAnalysis = findViewById(R.id.linearLayoutAnalysis);
-        monthRatioSpending_Image = findViewById(R.id.monthRatioSpending_Image);
+//        monthRatioSpending_Image = findViewById(R.id.monthRatioSpending_Image);
 
         analyticsTransportAmount = findViewById(R.id.analyticsTransportAmount);
         analyticsFoodAmount = findViewById(R.id.analyticsFoodAmount);
@@ -223,7 +224,7 @@ public class Analytics extends AppCompatActivity {
         //DateTime now = new DateTime();
         //Months months = Months.monthsBetween(epoch, now);
         int month= Calendar.getInstance().get(Calendar.MONTH)+1;
-        String itemNmonth = "House Expenses"+month;
+        String itemNmonth = "House"+month;
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
         Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
@@ -232,6 +233,7 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    Log.d("House", String.valueOf("yes"));
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
@@ -520,8 +522,8 @@ public class Analytics extends AppCompatActivity {
                         totalAmount+=pTotal;
 
                     }
-                    totalBudgetAmountTextView.setText("Monthly Spending: $ "+ totalAmount);
-                    monthSpentAmount.setText("Total Spent: $ "+totalAmount);
+                    totalBudgetAmountTextView.setText("Monthly Spending: € "+ totalAmount);
+//                    monthSpentAmount.setText("Total Spent: $ "+totalAmount);
                 }else {
                     anyChartView.setVisibility(View.GONE);
                 }
@@ -611,7 +613,7 @@ public class Analytics extends AppCompatActivity {
                     Pie pie = AnyChart.pie();
                     List<DataEntry> data = new ArrayList<>();
                     data.add(new ValueDataEntry("Transport", traTotal));
-                    data.add(new ValueDataEntry("House exp", houseTotal));
+                    data.add(new ValueDataEntry("House", houseTotal));
                     data.add(new ValueDataEntry("Food", foodTotal));
                     data.add(new ValueDataEntry("Entertainment", entTotal));
                     data.add(new ValueDataEntry("Education", eduTotal));

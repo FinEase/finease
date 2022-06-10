@@ -1,0 +1,42 @@
+<!-- RelativeLayout places the components vertically one by one.
+	Necessary parameters also specified so that elegant output can be seen -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/bg_2"
+    tools:context=".HelpActivity">
+
+    <TextView
+        android:id="@+id/totalBudgetAmountTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Got a question? \n We're here to answer. \n Kindly refer to the below frequently asked questions. \nIf you don't see your question here, drop us an email at \nfinease.isee@gmail.com"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:fontFamily="serif"
+        android:textAlignment="center"
+        android:textColor="#00b8e6"
+        android:layout_marginTop="5dp"
+        />
+
+    <!-- ExpandableListView is used in relativelayout
+        The android:indicatorLeft is the left bound for an items indicator.-->
+    <ExpandableListView
+        android:id="@+id/expandableListViewSample"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="serif"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
+
+</RelativeLayout>
+    <!-- Note: We cannot use the value wrap_content for the android:layout_height
+        attribute of the ExpandableListView in XML. -->

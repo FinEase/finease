@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinEase">
         <activity
+            android:name=".HelpActivity"
+            android:exported="false" />
+        <activity
             android:name=".Analytics"
             android:exported="false" />
         <activity

@@ -189,12 +189,12 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/Export"
+                android:id="@+id/SignOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="2"
                 android:layout_rowWeight="1"
-                android:layout_column="0"
+                android:layout_column="1"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="20dp"
@@ -211,12 +211,13 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/export_logo" />
+                        android:layout_marginLeft="5sp"
+                        android:src="@drawable/signoutlogo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Export File"
+                        android:text="Sign Out"
                         android:textAlignment="center"
                         android:textColor="#00b8e6"
                         android:textSize="17dp"
@@ -232,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_row="2"
                 android:layout_rowWeight="1"
-                android:layout_column="1"
+                android:layout_column="0"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="20dp"
