@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Codes/finease/app/src/main/res/drawable/ic_person.xml" value="0.141" />
+        <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_account.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_analytics.xml" value="0.1" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_budget.xml" value="0.2030392570704939" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_expense.xml" value="0.2030392570704939" />
+        <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_export.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_filter.xml" value="0.1" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_help.xml" value="0.2056434373663959" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/activity_main.xml" value="0.2030392570704939" />
@@ -16,6 +19,7 @@
         <entry key="..\:/Codes/finease/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.2030392570704939" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/spinner_item.xml" value="0.2030392570704939" />
         <entry key="..\:/Codes/finease/app/src/main/res/layout/update_layout.xml" value="0.2030392570704939" />
+        <entry key="..\:/Codes/finease/app/src/main/res/menu/menu.xml" value="0.1974050046339203" />
       </map>
     </option>
   </component>
