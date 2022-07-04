@@ -87,12 +87,19 @@ public class BudgetActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int totalAmount = 0;
+                int mnt = 0;
+                int mnt_now = 0;
+                DateTime now = new DateTime();
 
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     Data data = snap.getValue(Data.class);
                     totalAmount += data.getAmount();
-                    String sTotal = String.valueOf("Monthly budget: €" + totalAmount);
-                    totalBudgetAmountTextView.setText(sTotal);
+                    mnt = data.getMonth();
+                    mnt_now = now.getMonthOfYear() - 1;
+                    if (mnt_now == mnt){
+                        String sTotal = String.valueOf("Monthly budget: €" + totalAmount);
+                        totalBudgetAmountTextView.setText(sTotal);
+                    }
                 }
             }
 
