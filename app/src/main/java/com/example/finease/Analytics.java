@@ -205,12 +205,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now = new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsFoodAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsFoodAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthFood").setValue(totalAmount);
                 }else {
@@ -241,13 +248,20 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     Log.d("House", String.valueOf("yes"));
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsHouseExpensesAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsHouseExpensesAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthHouse").setValue(totalAmount);
                 }else {
@@ -278,12 +292,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsEntertainmentAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsEntertainmentAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthEnt").setValue(totalAmount);
                 }else {
@@ -315,12 +336,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsEducationAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsEducationAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthEdu").setValue(totalAmount);
                 }else {
@@ -352,12 +380,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsCharityAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsCharityAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthChar").setValue(totalAmount);
                 }else {
@@ -389,12 +424,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsApparelAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsApparelAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthApp").setValue(totalAmount);
                 }else {
@@ -425,12 +467,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsHealthAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsHealthAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthHea").setValue(totalAmount);
                 }else {
@@ -458,12 +507,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsPersonalExpensesAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsPersonalExpensesAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthPer").setValue(totalAmount);
                 }else {
@@ -491,12 +547,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt_now=0;
+                    DateTime now=new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsOtherAmount.setText("Spent: " + totalAmount);
+                        Object mnth=map.get("month");
+                        int pmnt=Integer.parseInt(String.valueOf(mnth));
+                        mnt_now=now.getMonthOfYear();
+                        if(mnt_now==pmnt) {
+                            totalAmount += pTotal;
+                            analyticsOtherAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthOther").setValue(totalAmount);
                 }else {
@@ -532,8 +595,8 @@ public class Analytics extends AppCompatActivity {
                     }
                     totalAverage=totalAmount/30;
                     totalAverage=Math.round(totalAverage * 100.0) / 100.0;
-                    totalBudgetAmountTextView.setText("Monthly Spending Average: € "+ totalAmount);
-                    monthSpentAmount.setText("Average Monthly Spending: $ "+totalAverage);
+                    totalBudgetAmountTextView.setText("Monthly Spending: € "+ totalAmount);
+                    monthSpentAmount.setText("Average Daily Spending: € "+totalAverage);
 
                 }else {
                     anyChartView.setVisibility(View.GONE);
