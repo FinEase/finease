@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:elevation="10dp"
+    app:cardElevation="10dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linerLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="mode"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:textColor="#00b8e6"
+                android:fontFamily="serif"
+                android:textSize="15sp"
+                android:id="@+id/mode"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="item"
+                android:textStyle="bold"
+                android:textColor="#00b8e6"
+                android:fontFamily="serif"
+                android:textSize="15sp"
+                android:id="@+id/item"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="note"
+                android:textStyle="bold"
+                android:textColor="#00b8e6"
+                android:fontFamily="serif"
+                android:textSize="15sp"
+                android:id="@+id/note"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="date"
+                android:textStyle="bold"
+                android:textColor="#00b8e6"
+                android:fontFamily="serif"
+                android:textSize="15sp"
+                android:id="@+id/date"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="170dp"
+            android:src="@drawable/ic_house">
+        </ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="€0"
+            android:textStyle="normal"
+            android:textColor="#00b8e6"
+            android:fontFamily="serif"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="300dp"
+            android:textSize="30sp"
+            android:id="@+id/amount"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

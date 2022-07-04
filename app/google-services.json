@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1070438019089",
+    "project_id": "finease-f4147",
+    "storage_bucket": "finease-f4147.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070438019089:android:3477b164ff9267b474c1b0",
+        "android_client_info": {
+          "package_name": "com.example.finease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070438019089-ua19mden94rghqp8luen162b8ajbju65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finease",
+            "certificate_hash": "334245ca34337b6adf3bc5e51e672d23906e8db9"
+          }
+        },
+        {
+          "client_id": "1070438019089-6tf9jtpt4risocgss2l7bif4dvuk3uvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoOCZL2q_ezz9q6tnqFggrirwxV5A_9uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070438019089-6tf9jtpt4risocgss2l7bif4dvuk3uvg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

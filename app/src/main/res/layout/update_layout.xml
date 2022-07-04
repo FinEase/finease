@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="itemName"
+        android:textColor="#00b8e6"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="@font/berlinsans"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Amount.."
+            android:inputType="number"
+            android:id="@+id/amount"
+            android:fontFamily="serif"
+            android:alpha="0.5"
+            android:textColorHint="#000"/>
+        <Spinner
+            android:id="@+id/currencySpinner"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_width="140dp"
+            android:entries="@array/currencies">
+        </Spinner>
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter a Note.."
+        android:id="@+id/note"
+        android:fontFamily="serif"
+        android:alpha="0.5"
+        android:textColorHint="#000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:backgroundTint="#1ab2ff"
+                android:layout_margin="2dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:backgroundTint="#1ab2ff"
+                android:layout_margin="2dp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
