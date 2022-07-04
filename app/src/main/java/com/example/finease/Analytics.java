@@ -158,12 +158,20 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     int totalAmount = 0;
+                    int mnt = 0;
+                    int mnt_now = 0;
+                    DateTime now = new DateTime();
                     for (DataSnapshot ds :  snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                        analyticsTransportAmount.setText("Spent: " + totalAmount);
+                        Object mnth = map.get("month");
+                        int pmnt = Integer.parseInt(String.valueOf(mnth));
+                        mnt_now = now.getMonthOfYear();
+                        if (mnt_now == pmnt) {
+                            totalAmount += pTotal;
+                            analyticsTransportAmount.setText("Spent: " + totalAmount);
+                        }
                     }
                     personalRef.child("monthTrans").setValue(totalAmount);
 
