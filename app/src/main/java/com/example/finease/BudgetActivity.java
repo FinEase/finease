@@ -255,7 +255,8 @@ public class BudgetActivity extends AppCompatActivity {
                     }
                 else {
                         String id  = budgetRef.push().getKey();
-                        Data data = new Data(budgetItem, null, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(budgetAmount), weeks.getWeeks(), months.getMonths(), curr, null);
+                        month = now.getMonthOfYear() - 1;
+                        Data data = new Data(budgetItem, null, date, id, itemNday, itemNweek, itemNmonth, Integer.parseInt(budgetAmount), weeks.getWeeks(), month, curr, null);
                         budgetRef.child(id).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
