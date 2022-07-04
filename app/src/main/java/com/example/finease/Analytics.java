@@ -76,9 +76,9 @@ public class Analytics extends AppCompatActivity {
         totalBudgetAmountTextView = findViewById(R.id.totalBudgetAmountTextView);
 
         //general analytic
-//        monthSpentAmount = findViewById(R.id.monthSpentAmount);
-        linearLayoutAnalysis = findViewById(R.id.linearLayoutAnalysis);
-//        monthRatioSpending_Image = findViewById(R.id.monthRatioSpending_Image);
+      monthSpentAmount = findViewById(R.id.monthSpentAmount);
+      linearLayoutAnalysis = findViewById(R.id.linearLayoutAnalysis);
+       monthRatioSpending_Image = findViewById(R.id.monthRatioSpending_Image);
 
         analyticsTransportAmount = findViewById(R.id.analyticsTransportAmount);
         analyticsFoodAmount = findViewById(R.id.analyticsFoodAmount);
@@ -514,16 +514,19 @@ public class Analytics extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0){
-                    int totalAmount = 0;
+                    double totalAmount = 0;
+                    double totalAverage=0;
                     for (DataSnapshot ds :  dataSnapshot.getChildren()){
                         Map<String, Object> map = (Map<String, Object>)ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
                         totalAmount+=pTotal;
-
                     }
-                    totalBudgetAmountTextView.setText("Monthly Spending: € "+ totalAmount);
-//                    monthSpentAmount.setText("Total Spent: $ "+totalAmount);
+                    totalAverage=totalAmount/30;
+                    totalAverage=Math.round(totalAverage * 100.0) / 100.0;
+                    totalBudgetAmountTextView.setText("Monthly Spending Average: € "+ totalAmount);
+                    monthSpentAmount.setText("Average Monthly Spending: $ "+totalAverage);
+
                 }else {
                     anyChartView.setVisibility(View.GONE);
                 }
